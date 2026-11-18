@@ -25,6 +25,6 @@
 </p>
 
 <p align="center">
-  <a href="https://ko-fi.com/obscuratea"><img src="assets/kofi.png" alt="Support on Ko-fi" width="26%"></a>
-  <a href="https://www.patreon.com/Obscuratea"><img src="assets/patreon.png" alt="Support on Patreon" width="26%"></a>
+  <a href="https://ko-fi.com/obscuratea"><img src="assets/kofi.png" alt="Support on Ko-fi" width="27%"></a>
+  <a href="https://www.patreon.com/Obscuratea"><img src="assets/patreon.png" alt="Support on Patreon" width="27%"></a>
 </p>
