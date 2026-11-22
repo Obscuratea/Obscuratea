@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/Obscuratea/vox-obscurus"><img src="assets/vox.png" alt="Vox Obscurus: a Voicemeeter-style audio mixer for Linux" width="49%"></a>
+  <a href="https://github.com/Obscuratea/vox-obscurus"><img src="assets/vox-card.png" alt="Vox Obscurus: a Voicemeeter-style audio mixer for Linux" width="49%"></a>
   <a href="https://github.com/Obscuratea/cuniculus"><img src="assets/cuniculus.png" alt="Cuniculus: a Sonique-style music visualizer for Linux" width="49%"></a>
 </p>
 
