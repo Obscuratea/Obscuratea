@@ -1,0 +1,137 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Obscuratea profile cards</title>
+<style>
+:root{--bg:#14151a;--hi:#1e1f25;--lo:#0d0e11;--ink:#f2f1ee;--mute:#8b8d93;--acc:#8f6bff}
+*{box-sizing:border-box;margin:0}
+html,body{background:transparent;overflow:hidden}
+body{font-family:Archivo,Inter,sans-serif;color:var(--ink)}
+.card{display:none;position:relative;overflow:hidden;border-radius:44px;
+ background:radial-gradient(1200px 700px at 25% 0%,#1c1e24 0%,#15161b 60%,#111216 100%)}
+body[data-c="hero"] [data-id="hero"],body[data-c="vox"] [data-id="vox"],body[data-c="animus"] [data-id="animus"],
+body[data-c="solocups"] [data-id="solocups"],body[data-c="drive"] [data-id="drive"],body[data-c="neuglade"] [data-id="neuglade"],
+body[data-c="cuniculus"] [data-id="cuniculus"],body[data-c="stack"] [data-id="stack"],body[data-c="kofi"] [data-id="kofi"],body[data-c="patreon"] [data-id="patreon"]{display:block}
+.mono{font-family:"Geist Mono",monospace;letter-spacing:.12em;text-transform:uppercase}
+/* neumorphic primitives */
+.raised{background:linear-gradient(145deg,#1d1e24,#131418);box-shadow:14px 14px 30px #08080a,-10px -10px 26px #272930,inset 1px 1px 2px #ffffff0c}
+.well{background:#121317;box-shadow:inset 10px 10px 22px #08080a,inset -8px -8px 20px #25272d}
+.chip{display:inline-flex;align-items:center;gap:12px;font:500 20px "Geist Mono",monospace;letter-spacing:.1em;text-transform:uppercase;color:#c9c9cc;
+ padding:12px 24px;border-radius:999px;background:linear-gradient(145deg,#1f2026,#141519);box-shadow:7px 7px 14px #08080a,-5px -5px 12px #272930}
+.chip i{width:10px;height:10px;border-radius:50%;background:var(--a,var(--acc));box-shadow:0 0 10px var(--a,var(--acc))}
+.corner{position:absolute;width:34px;height:34px;border:3px solid #55575d}
+.tl{left:34px;top:34px;border-right:0;border-bottom:0}.tr{right:34px;top:34px;border-left:0;border-bottom:0}
+.bl{left:34px;bottom:34px;border-right:0;border-top:0}.brc{right:34px;bottom:34px;border-left:0;border-top:0}
+.grid{position:absolute;inset:0;background-image:linear-gradient(#ffffff05 1px,transparent 1px),linear-gradient(90deg,#ffffff05 1px,transparent 1px);background-size:100px 100px}
+/* hero */
+#hero{width:1600px;height:520px}
+#hero .lab{position:absolute;font:500 18px "Geist Mono",monospace;letter-spacing:.14em;color:#6d6f75;text-transform:uppercase}
+#hero .plate{position:absolute;left:250px;top:105px;width:310px;height:310px;border-radius:50%;display:grid;place-items:center}
+#hero .wl{width:244px;height:244px;border-radius:50%;display:grid;place-items:center}
+#hero .wl svg{width:186px;height:186px}
+#hero .txt{position:absolute;left:630px;top:112px}
+#hero .handle{font:500 26px "Geist Mono",monospace;letter-spacing:.14em;color:#9a9ca2}
+#hero .name{font:800 168px/1.02 Archivo;letter-spacing:-.01em;text-shadow:5px 7px 14px #08080a,-2px -2px 8px #ffffff0a}
+#hero .chips{display:flex;gap:16px;margin-top:20px}
+#hero .ghost{position:absolute;left:90px;bottom:-95px;font:800 300px/1 Archivo;color:#ffffff05;white-space:nowrap}
+/* project cards */
+.p{--a:var(--acc)}
+.p .head{display:flex;align-items:center;gap:22px}
+.p .ico{width:84px;height:84px;border-radius:50%;display:grid;place-items:center;flex:none}
+.p .ico img,.p .ico svg{width:52px;height:52px;border-radius:14px;display:block}
+.p .ico b{font:800 38px Archivo;color:var(--a)}
+.p h2{font:800 46px/1 Archivo;letter-spacing:-.005em;text-shadow:3px 4px 8px #08080a}
+.p .sub{font:500 17px "Geist Mono",monospace;letter-spacing:.14em;color:#8b8d93;text-transform:uppercase;margin-top:8px}
+.p .shot{border-radius:26px;padding:14px;overflow:hidden}
+.p .shot div{border-radius:16px;background-size:cover;background-position:top left;width:100%;height:100%;box-shadow:0 0 0 1px #ffffff10}
+.p p{font:500 25px/1.45 Archivo;color:#b9bac0}
+.p .chips{display:flex;gap:14px;flex-wrap:wrap}
+.p .state{position:absolute;right:46px;top:52px}
+.half{width:788px;height:760px}
+.half .head{position:absolute;left:44px;top:44px}
+.half .shot{position:absolute;left:44px;top:156px;width:700px;height:400px}
+.half .copy{position:absolute;left:44px;top:588px;right:44px}
+.half .copy p{font-size:23px;margin-bottom:0;height:68px}
+.half .chips{position:absolute;left:44px;bottom:36px}
+.half .state{right:44px;top:56px}
+/* stack + support */
+#stack{width:1600px;height:210px}
+#stack .lab{position:absolute;left:56px;top:48px;font:500 18px "Geist Mono",monospace;letter-spacing:.14em;color:#6d6f75;text-transform:uppercase}
+#stack .chips{position:absolute;left:56px;right:56px;top:96px;display:flex;gap:16px;flex-wrap:wrap}
+#kofi,#patreon{width:460px;height:180px;border-radius:44px}
+.pill{position:absolute;left:50px;top:44px;width:360px;height:92px;border-radius:46px}
+#stack .chip{font-size:17px;padding:10px 19px;gap:10px}
+#stack .chips{justify-content:space-between}
+.supp{display:flex;align-items:center;justify-content:center;gap:18px;height:100%;font:700 30px Archivo}
+.supp i{width:14px;height:14px;border-radius:50%;background:var(--a);box-shadow:0 0 12px var(--a)}
+
+/* GitHub-dark sections: flat #0d1117 so they melt into the page */
+.gh{background:#0d1117 !important}
+.gh .raised,.gh.raised{background:linear-gradient(145deg,#171d26,#0a0e13);box-shadow:12px 12px 26px #04060a,-9px -9px 22px #1b222c,inset 1px 1px 2px #ffffff0a}
+.gh .well{background:#0d1117;box-shadow:inset 10px 10px 22px #04060a,inset -8px -8px 20px #1b222c}
+.gh .chip{background:linear-gradient(145deg,#181e27,#0a0e13);box-shadow:7px 7px 14px #04060a,-5px -5px 12px #1b222c}
+.gh h2{text-shadow:3px 4px 8px #04060a}
+/* hero keeps its grey but dissolves into the page */
+#hero{background:radial-gradient(ellipse 78% 92% at 50% 46%,#1d1f25 0%,#18191e 42%,#10131a 78%,#0d1117 100%)}
+#hero .grid{-webkit-mask-image:radial-gradient(ellipse 70% 85% at 50% 46%,#000 0%,transparent 100%);mask-image:radial-gradient(ellipse 70% 85% at 50% 46%,#000 0%,transparent 100%)}
+#hero .corner{opacity:.55}
+
+/* cleaner depth: tighter, softer pairs + hairline edge */
+.gh .raised,.gh.raised{box-shadow:9px 9px 20px #04060a,-7px -7px 18px #1a212b,inset 1px 1px 1px #ffffff0d;border:1px solid #ffffff08}
+.gh .chip{box-shadow:6px 6px 13px #04060a,-5px -5px 11px #1a212b,inset 1px 1px 1px #ffffff0b;border:1px solid #ffffff07}
+.gh .well{box-shadow:inset 8px 8px 18px #04060a,inset -7px -7px 16px #1a212b;border:1px solid #ffffff06}
+</style></head><body>
+<div class="card" id="hero" data-id="hero"><div class="grid"></div>
+ <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner brc"></div>
+ <div class="lab" style="left:92px;top:78px">01 / Obscura</div><div class="lab" style="right:92px;top:78px">CachyOS · KDE Plasma</div>
+ <div class="ghost">OBSCURA</div>
+ <div class="plate raised"><div class="wl well"><svg viewBox="204 204 392 392"><path fill="#f2f1ee" d="M255.46 523.32A190 190 0 0 1 523.32 255.46L462.88 315.91A105 105 0 0 0 315.91 462.88ZM325.21 453.58A92 92 0 0 1 453.58 325.21L446.40 332.39A82 82 0 0 0 332.39 446.40ZM544.54 276.68A190 190 0 0 1 276.68 544.54L283.77 537.44A180 180 0 0 0 537.44 283.77ZM474.79 346.42A92 92 0 0 1 346.42 474.79L353.60 467.61A82 82 0 0 0 467.61 353.60ZM464.01 357.20A77 77 0 0 1 357.20 464.01ZM555.56 235.95L564.05 244.44L244.44 564.05L235.95 555.56Z"/><circle cx="496" cy="496" r="20" fill="#8f6bff"/></svg></div></div>
+ <div class="txt"><div class="handle">@OBSCURATEA</div><div class="name">OBSCURA</div>
+  <div class="chips"><span class="chip"><i></i>Linux apps</span><span class="chip"><i></i>Widgets</span><span class="chip"><i></i>Desktop</span></div></div>
+</div>
+
+<div class="card p half gh" id="vox" data-id="vox" style="--a:#ff4fd8">
+ <div class="head"><div class="ico raised"><img src="assets/src/vox-obscurus.svg"></div><div><h2>Vox Obscurus</h2><div class="sub">Audio mixer · PipeWire</div></div></div>
+ <div class="shot well"><div style="background-image:url(assets/src/vox.png)"></div></div>
+ <div class="copy"><p>A Voicemeeter-style mixer for Linux. Route mics and apps to speakers and virtual mics, with EQ and plugins.</p></div>
+ <div class="chips"><span class="chip"><i></i>Rust</span><span class="chip"><i></i>Qt Quick</span><span class="chip"><i></i>PipeWire</span></div>
+</div>
+
+<div class="card p half gh" id="cuniculus" data-id="cuniculus" style="--a:#ff7ad9">
+ <div class="head"><div class="ico raised"><img src="assets/src/cuniculus.svg"></div><div><h2>Cuniculus</h2><div class="sub">Music visualizer · EDM</div></div></div>
+ <div class="shot well"><div style="background-image:url(assets/src/cuniculus.png)"></div></div>
+ <div class="copy"><p>A Sonique-style visualizer for Linux. It reacts to the kick and the drop, with plugins you can write.</p></div>
+ <div class="chips"><span class="chip"><i></i>Python</span><span class="chip"><i></i>OpenGL</span><span class="chip"><i></i>PipeWire</span></div>
+</div>
+
+<div class="card p half gh" id="animus" data-id="animus" style="--a:#8f7bff">
+ <div class="head"><div class="ico raised"><img src="assets/src/animus-obscurus.svg"></div><div><h2>Animus Obscurus</h2><div class="sub">Anime + manga tracker</div></div></div>
+ <div class="shot well"><div style="background-image:url(assets/src/animus.png)"></div></div>
+ <div class="copy"><p>A tracker that runs on your own computer. Any-site episode links, Airing, Discover and friends' picks.</p></div>
+ <div class="chips"><span class="chip"><i></i>Python</span><span class="chip"><i></i>Self-hosted</span></div>
+</div>
+
+<div class="card p half gh" id="solocups" data-id="solocups" style="--a:#ff5d6c">
+ <div class="head"><div class="ico raised"><img src="assets/src/solocups.svg"></div><div><h2>SoloCUPS</h2><div class="sub">Printer manager · CUPS</div></div></div>
+ <div class="shot well"><div style="background-image:url(assets/src/solocups.png);background-position:center;background-repeat:no-repeat;background-size:contain;background-color:#0c0c0f"></div></div>
+ <div class="copy"><p>Zero-headache printing on Linux. Add a printer, send a test page, manage the queue.</p></div>
+ <div class="chips"><span class="chip"><i></i>Python</span><span class="chip"><i></i>PyQt6</span></div>
+</div>
+
+<div class="card p half gh" id="drive" data-id="drive" style="--a:#ff4fd8">
+ <div class="head"><div class="ico raised"><b>D</b></div><div><h2>DriVE</h2><div class="sub">Drift Video Edition</div></div></div>
+ <div class="shot well"><div style="background-image:url(assets/src/drive.png);background-position:center;background-repeat:no-repeat;background-size:contain;background-color:#190e33"></div></div>
+ <div class="copy"><p>YouTube in your terminal. Search, play, save and picture-in-picture, all on Vim keys.</p></div>
+ <div class="chips"><span class="chip"><i></i>Rust</span><span class="chip"><i></i>mpv</span></div>
+</div>
+
+<div class="card p half gh" id="neuglade" data-id="neuglade" style="--a:#6aa8ff">
+ <div class="head"><div class="ico raised"><b>N</b></div><div><h2>NeuGlaDE</h2><div class="sub">Neumorphism + Glass + DE</div></div></div>
+ <div class="shot well"><div style="background-image:url(assets/src/neuglade.png);background-position:center"></div></div>
+ <div class="copy"><p>A desktop environment with its own Rust Wayland compositor. Early preview, still in the workshop.</p></div>
+ <div class="chips"><span class="chip"><i></i>Rust</span><span class="chip"><i></i>Wayland</span><span class="chip"><i></i>Quickshell</span></div>
+ <div class="state chip" style="position:absolute;--a:#ffb454"><i></i>In progress</div>
+</div>
+
+<div class="card gh" id="stack" data-id="stack"><div class="lab">Built with</div>
+ <div class="chips"><span class="chip"><i></i>Rust</span><span class="chip"><i></i>Python</span><span class="chip"><i></i>PyQt6</span><span class="chip"><i></i>Qt Quick</span><span class="chip"><i></i>Quickshell</span><span class="chip"><i></i>PipeWire</span><span class="chip"><i></i>Wayland</span><span class="chip"><i></i>Godot</span><span class="chip"><i></i>Lua</span></div></div>
+<div class="card gh" id="kofi" data-id="kofi" style="--a:#ff5e5b"><div class="pill raised"><div class="supp"><i></i>Ko-fi</div></div></div>
+<div class="card gh" id="patreon" data-id="patreon" style="--a:#ff7a59"><div class="pill raised"><div class="supp"><i></i>Patreon</div></div></div>
+<script>var h=decodeURIComponent(location.hash.slice(1)).split(',');document.body.dataset.c=h[0];if(h[1])document.documentElement.style.background=h[1]</script></body></html>
